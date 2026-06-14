@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NairaCuts Barbershop</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    .hero-bg {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+      url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+
+<body class="font-sans">
+
+<!-- NAVBAR -->
+<nav class="bg-black text-white fixed w-full z-50">
+  <div class="flex justify-between items-center px-6 py-4">
+    <h1 class="text-2xl font-bold text-yellow-400">NairaCuts</h1>
+
+    <div class="hidden md:flex space-x-6">
+      <a href="#home" class="hover:text-yellow-400">Home</a>
+      <a href="#about" class="hover:text-yellow-400">About</a>
+      <a href="#services" class="hover:text-yellow-400">Services</a>
+      <a href="#contact" class="hover:text-yellow-400">Contact</a>
+    </div>
+
+    <button id="menuBtn" class="md:hidden text-2xl">☰</button>
+  </div>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="hidden flex-col bg-black px-6 pb-4 md:hidden">
+    <a href="#home" class="py-2">Home</a>
+    <a href="#about" class="py-2">About</a>
+    <a href="#services" class="py-2">Services</a>
+    <a href="#contact" class="py-2">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero-bg h-screen flex items-center justify-center text-center text-white px-4">
+  <div>
+    <h2 class="text-4xl md:text-6xl font-bold mb-4">
+      Fresh Cuts. Naija Style. Sharp Vibes.
+    </h2>
+    <p class="text-lg md:text-xl mb-6">
+      Premium barber experience in Ibadan City 🇳🇬
+    </p>
+    <a href="#contact" class="bg-yellow-400 text-black px-6 py-3 font-bold rounded-full hover:bg-yellow-300">
+      Book Now
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-20 px-6 md:px-20 bg-gray-100">
+  <h2 class="text-3xl font-bold mb-6 text-center">About Us</h2>
+  <p class="max-w-3xl mx-auto text-center text-gray-700">
+    NairaCuts is a modern Nigerian barbershop delivering clean fades, sharp cuts, and premium grooming.
+    We mix street style with professionalism to give you the best look every time.
+  </p>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="py-20 px-6 md:px-20 bg-white">
+  <h2 class="text-3xl font-bold text-center mb-10">Our Services</h2>
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="p-6 shadow-lg rounded-xl text-center">
+      <h3 class="font-bold text-xl mb-2">Classic Haircut</h3>
+      <p>Clean everyday professional look.</p>
+    </div>
+
+    <div class="p-6 shadow-lg rounded-xl text-center">
+      <h3 class="font-bold text-xl mb-2">Fade Styles</h3>
+      <p>Sharp modern Naija street fades.</p>
+    </div>
+
+    <div class="p-6 shadow-lg rounded-xl text-center">
+      <h3 class="font-bold text-xl mb-2">Beard Grooming</h3>
+      <p>Clean shaping and styling for beards.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT + WHATSAPP BOOKING -->
+<section id="contact" class="py-20 px-6 md:px-20 bg-gray-900 text-white">
+  <h2 class="text-3xl font-bold text-center mb-10">Book Appointment</h2>
+
+  <div class="max-w-xl mx-auto">
+    <form id="bookingForm" class="space-y-4">
+
+      <input id="name" type="text" placeholder="Your Name"
+        class="w-full p-3 rounded text-black" required />
+
+      <input id="phone" type="text" placeholder="Phone Number"
+        class="w-full p-3 rounded text-black" required />
+
+      <select id="service" class="w-full p-3 rounded text-black" required>
+        <option value="">Select Service</option>
+        <option>Haircut</option>
+        <option>Fade</option>
+        <option>Beard Grooming</option>
+      </select>
+
+      <textarea id="message" placeholder="Extra Message"
+        class="w-full p-3 rounded text-black"></textarea>
+
+      <button type="submit"
+        class="bg-yellow-400 text-black w-full py-3 font-bold rounded hover:bg-yellow-300">
+        Send on WhatsApp
+      </button>
+
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-black text-white text-center py-6">
+  <p>© 2026 NairaCuts Barbershop 🇳🇬 Built for premium grooming vibes</p>
+</footer>
+
+<!-- JS -->
+<script>
+  // mobile menu
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+
+  // WhatsApp booking system
+  const form = document.getElementById("bookingForm");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const service = document.getElementById("service").value;
+    const message = document.getElementById("message").value;
+
+    // ⚠️ CHANGE THIS NUMBER to barber WhatsApp number
+    const barberNumber = "+2347042519210";
+
+    const whatsappText = `
+💈 *NairaCuts Booking Request*
+
+Name: ${name}
+Phone: ${phone}
+Service: ${service}
+Message: ${message || "No extra message"}
+
+I want to book an appointment.
+    `;
+
+    const url = `https://wa.me/${barberNumber}?text=${encodeURIComponent(whatsappText)}`;
+
+    window.open(url, "_blank");
+  });
+</script>
+
+</body>
+</html>
