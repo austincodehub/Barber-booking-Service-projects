@@ -163,7 +163,7 @@ I want to book an appointment.
 
     const url = `https://wa.me/${barberNumber}?text=${encodeURIComponent(whatsappText)}`;
 
-    window.open(url, "_blank");
+     window.location.href = url;
   });
 </script>
 
